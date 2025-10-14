@@ -6,7 +6,7 @@
 /*   By: dufama <dufama@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 10:54:39 by dufama            #+#    #+#             */
-/*   Updated: 2025/10/14 12:37:54 by dufama           ###   ########.fr       */
+/*   Updated: 2025/10/14 17:23:20 by dufama           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ char	*strjoin_free(char *s1, char *s2)
 	free(s1);
 	return (new_string);
 }
+
 char	*ft_strchr(const char *s, int c)
 {
 	unsigned char	value;

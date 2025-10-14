@@ -6,7 +6,7 @@
 /*   By: dufama <dufama@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 10:54:34 by dufama            #+#    #+#             */
-/*   Updated: 2025/10/14 17:21:07 by dufama           ###   ########.fr       */
+/*   Updated: 2025/10/14 17:24:33 by dufama           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,18 @@ static char	*open_and_stock(int fd, char *buff, char **stash)
 			return (NULL);
 		}
 		if (byte == 0)
-			break;
+			break ;
 		buff[byte] = '\0';
 		*stash = strjoin_free(*stash, buff);
 		if (!*stash)
 			return (NULL);
 		if (ft_strchr(buff, '\n'))
-			break;
+			break ;
 	}
 	return (*stash);
 }
 
-static char *extract_line(char *stash)
+static char	*extract_line(char *stash)
 {
 	char	*c_line;
 	size_t	len;
@@ -75,17 +75,17 @@ static void	clean_stash(char **stash)
 
 	i = 0;
 	if (!stash || !*stash)
-		return;
+		return ;
 	while ((*stash)[i] && (*stash)[i] != '\n')
 		i++;
 	if ((*stash)[i] == '\n')
 	{
 		if ((*stash)[i + 1] == '\0')
-			{
-				free(*stash);
-				*stash = NULL;
-				return;
-			}
+		{
+			free(*stash);
+			*stash = NULL;
+			return ;
+		}
 		next = ft_strdup(*stash + i + 1);
 		free(*stash);
 		*stash = next;
