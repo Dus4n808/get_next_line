@@ -6,13 +6,11 @@
 /*   By: dufama <dufama@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 10:54:34 by dufama            #+#    #+#             */
-/*   Updated: 2025/10/14 17:24:33 by dufama           ###   ########.fr       */
+/*   Updated: 2025/10/16 12:12:03 by dufama           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-#include <fcntl.h>
 
 static char	*open_and_stock(int fd, char *buff, char **stash)
 {
@@ -100,12 +98,16 @@ static void	clean_stash(char **stash)
 char	*get_next_line(int fd)
 {
 	static char	*stash;
-	char		buff[BUFFER_SIZE + 1];
+	char		*buff;
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
+	buff = malloc(BUFFER_SIZE + 1);
+	if (!buff)
+		return (NULL);
 	stash = open_and_stock(fd, buff, &stash);
+	free (buff);
 	if (!stash || stash[0] == '\0')
 	{
 		if (stash)
@@ -125,6 +127,7 @@ char	*get_next_line(int fd)
 // 	int fd = open("coucou.txt", O_RDONLY);
 // 	if (!fd)
 // 		return (0);
-// 	printf("%s\n", get_next_line(fd));
+// 	get_next_line(fd);
+// 	//printf("%s\n", get_next_line(fd));
 
 // }
