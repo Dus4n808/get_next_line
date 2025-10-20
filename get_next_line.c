@@ -6,13 +6,13 @@
 /*   By: dufama <dufama@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 10:54:34 by dufama            #+#    #+#             */
-/*   Updated: 2025/10/16 12:12:03 by dufama           ###   ########.fr       */
+/*   Updated: 2025/10/20 13:44:05 by dufama           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*open_and_stock(int fd, char *buff, char **stash)
+static char	*open_and_stock(int fd, char *buff, char *stash)
 {
 	ssize_t		byte;
 
@@ -22,20 +22,20 @@ static char	*open_and_stock(int fd, char *buff, char **stash)
 		byte = read(fd, buff, BUFFER_SIZE);
 		if (byte < 0)
 		{
-			free(*stash);
-			*stash = NULL;
+			free(stash);
+			stash = NULL;
 			return (NULL);
 		}
 		if (byte == 0)
 			break ;
 		buff[byte] = '\0';
-		*stash = strjoin_free(*stash, buff);
-		if (!*stash)
+		stash = strjoin_free(stash, buff);
+		if (!stash)
 			return (NULL);
 		if (ft_strchr(buff, '\n'))
 			break ;
 	}
-	return (*stash);
+	return (stash);
 }
 
 static char	*extract_line(char *stash)
@@ -106,7 +106,7 @@ char	*get_next_line(int fd)
 	buff = malloc(BUFFER_SIZE + 1);
 	if (!buff)
 		return (NULL);
-	stash = open_and_stock(fd, buff, &stash);
+	stash = open_and_stock(fd, buff, stash);
 	free (buff);
 	if (!stash || stash[0] == '\0')
 	{
