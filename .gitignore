@@ -1,3 +1,3 @@
 *.txt
 debug
-a.out
+./a.out
